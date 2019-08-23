@@ -10,8 +10,9 @@ public class UserToBigQuery extends DoFn<UserAggregate, TableRow> {
 	public void processElement(ProcessContext c) {
 		UserAggregate userAggregate = c.element();
 		TableRow row = new TableRow()
-				.set("user_id", userAggregate.getWindow())
-				.set("user_count", userAggregate.getUserCount())
+				.set("user_id", userAggregate.getUserId())
+				.set("window",userAggregate.getWindow().toString())
+				.set("number_of_sentences", userAggregate.getNumberOfSentences())
 				.set("number_of_languages", userAggregate.getNumberOfLanguages())
 				.set("average_time_between", userAggregate.getAverageTimeBetween())
 				.set("total_session_lenght", userAggregate.getTotalSessionLength());

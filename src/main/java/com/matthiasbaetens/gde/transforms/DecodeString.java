@@ -2,8 +2,6 @@ package com.matthiasbaetens.gde.transforms;
 
 import org.apache.beam.sdk.transforms.DoFn;
 
-import com.matthiasbaetens.gde.messages.Log;
-
 public class DecodeString extends DoFn<String, String> {
 
 	@ProcessElement

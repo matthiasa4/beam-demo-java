@@ -12,7 +12,6 @@ public class MessageToLogs extends DoFn<String, Log>{
 
 	@ProcessElement
 	public void processElement(@Element String message, OutputReceiver<Log> receiver) {
-		System.out.println(message);
 		Gson gson = new GsonBuilder().registerTypeAdapter(DateTime.class, new EpochDateTypeAdapter()).create();
 		Log log = gson.fromJson(message, Log.class);
 

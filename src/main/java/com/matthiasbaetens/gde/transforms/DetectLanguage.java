@@ -18,8 +18,6 @@ public class DetectLanguage extends DoFn<Log, Log>{
 	    log_out.setTranslateConfidence(detectedLanguage.getConfidence());
 	    log_out.setTranslateLanguage(detectedLanguage.getLanguage());
 		
-	    System.out.println(log_out);
-
 		receiver.output(log_out);
 	}
 }

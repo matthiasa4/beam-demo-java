@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 import org.joda.time.DateTime;
 
-public class Log implements Serializable {
+public class Log implements Serializable, Comparable<Log> {
 	String text;
 	String userId;
 	String translateLanguage;
 	Float translateConfidence;
 	DateTime timestamp;
-	
+
 	public Log(Log original) {
 		this.text = original.text;
 		this.userId = original.userId;
@@ -57,5 +57,9 @@ public class Log implements Serializable {
 
 	public void setTranslateConfidence(Float translateConfidence) {
 		this.translateConfidence = translateConfidence;
+	}
+
+	public int compareTo(Log other) {
+		return new Long(this.getTimestamp().getMillis()).compareTo(other.getTimestamp().getMillis());
 	}
 }

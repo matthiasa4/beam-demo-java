@@ -1,33 +1,34 @@
 package com.matthiasbaetens.gde.messages;
 
+import java.io.Serializable;
+
+import org.apache.beam.sdk.transforms.windowing.IntervalWindow;
 import org.apache.beam.sdk.transforms.windowing.Window;
 
-public class UserAggregate {
-	Window window;
+public class UserAggregate implements Serializable {
+	IntervalWindow window;
 	String userId;
-	Integer userCount;
 	Integer numberOfLanguages;
 	Integer numberOfSentences;
-	Float averageTimeBetween;
-	Float totalSessionLength;
+	double averageTimeBetween;
+	long totalSessionLength;
 
-	public UserAggregate(Window window, String userId, Integer userCount, Integer numberOfLanguages,
-			Integer numberOfSentences, Float averageTimeBetween, Float totalSessionLength) {
+	public UserAggregate(IntervalWindow window, String userId, Integer numberOfLanguages, Integer numberOfSentences,
+			double averageTimeBetween, long totalSessionLength) {
 		super();
 		this.window = window;
 		this.userId = userId;
-		this.userCount = userCount;
 		this.numberOfLanguages = numberOfLanguages;
 		this.numberOfSentences = numberOfSentences;
 		this.averageTimeBetween = averageTimeBetween;
 		this.totalSessionLength = totalSessionLength;
 	}
 
-	public Window getWindow() {
+	public IntervalWindow getWindow() {
 		return window;
 	}
 
-	public void setWindow(Window window) {
+	public void setWindow(IntervalWindow window) {
 		this.window = window;
 	}
 
@@ -37,14 +38,6 @@ public class UserAggregate {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-
-	public Integer getUserCount() {
-		return userCount;
-	}
-
-	public void setUserCount(Integer userCount) {
-		this.userCount = userCount;
 	}
 
 	public Integer getNumberOfLanguages() {
@@ -63,19 +56,19 @@ public class UserAggregate {
 		this.numberOfSentences = numberOfSentences;
 	}
 
-	public Float getAverageTimeBetween() {
+	public double getAverageTimeBetween() {
 		return averageTimeBetween;
 	}
 
-	public void setAverageTimeBetween(Float averageTimeBetween) {
+	public void setAverageTimeBetween(double averageTimeBetween) {
 		this.averageTimeBetween = averageTimeBetween;
 	}
 
-	public Float getTotalSessionLength() {
+	public long getTotalSessionLength() {
 		return totalSessionLength;
 	}
 
-	public void setTotalSessionLength(Float totalSessionLength) {
+	public void setTotalSessionLength(long totalSessionLength) {
 		this.totalSessionLength = totalSessionLength;
 	}
 

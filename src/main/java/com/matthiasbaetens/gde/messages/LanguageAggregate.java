@@ -1,25 +1,27 @@
 package com.matthiasbaetens.gde.messages;
 
-import org.apache.beam.sdk.transforms.windowing.Window;
+import java.io.Serializable;
 
-public class LanguageAggregate {
+import org.apache.beam.sdk.transforms.windowing.IntervalWindow;
 
-	Window window;
+public class LanguageAggregate implements Serializable {
+
+	IntervalWindow window;
 	String language;
 	Integer languageCount;
 
-	public LanguageAggregate(Window window, String language, Integer languageCount) {
+	public LanguageAggregate(IntervalWindow window, String language, Integer languageCount) {
 		super();
 		this.window = window;
 		this.language = language;
 		this.languageCount = languageCount;
 	}
 
-	public Window getWindow() {
+	public IntervalWindow getWindow() {
 		return window;
 	}
 
-	public void setWindow(Window window) {
+	public void setWindow(IntervalWindow window) {
 		this.window = window;
 	}
 
