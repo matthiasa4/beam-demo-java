@@ -6,22 +6,22 @@ import org.apache.beam.sdk.transforms.windowing.IntervalWindow;
 
 public class LanguageAggregate implements Serializable {
 
-	IntervalWindow window;
+	String window;
 	String language;
 	Integer languageCount;
 
-	public LanguageAggregate(IntervalWindow window, String language, Integer languageCount) {
+	public LanguageAggregate(String window, String language, Integer languageCount) {
 		super();
 		this.window = window;
 		this.language = language;
 		this.languageCount = languageCount;
 	}
 
-	public IntervalWindow getWindow() {
+	public String getWindow() {
 		return window;
 	}
 
-	public void setWindow(IntervalWindow window) {
+	public void setWindow(String window) {
 		this.window = window;
 	}
 

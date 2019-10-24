@@ -6,14 +6,14 @@ import org.apache.beam.sdk.transforms.windowing.IntervalWindow;
 import org.apache.beam.sdk.transforms.windowing.Window;
 
 public class UserAggregate implements Serializable {
-	IntervalWindow window;
+	String window;
 	String userId;
 	Integer numberOfLanguages;
 	Integer numberOfSentences;
 	double averageTimeBetween;
 	long totalSessionLength;
 
-	public UserAggregate(IntervalWindow window, String userId, Integer numberOfLanguages, Integer numberOfSentences,
+	public UserAggregate(String window, String userId, Integer numberOfLanguages, Integer numberOfSentences,
 			double averageTimeBetween, long totalSessionLength) {
 		super();
 		this.window = window;
@@ -24,11 +24,11 @@ public class UserAggregate implements Serializable {
 		this.totalSessionLength = totalSessionLength;
 	}
 
-	public IntervalWindow getWindow() {
+	public String getWindow() {
 		return window;
 	}
 
-	public void setWindow(IntervalWindow window) {
+	public void setWindow(String window) {
 		this.window = window;
 	}
 

@@ -13,7 +13,7 @@ public class DetectLanguage extends DoFn<Log, Log>{
 	public void processElement(@Element Log log, OutputReceiver<Log> receiver) {	
 		Log log_out = new Log(log);
 	    Translate translate = TranslateOptions.getDefaultInstance().getService();
-	    
+	    	    
 	    Detection detectedLanguage = translate.detect(log.getText());	    
 	    log_out.setTranslateConfidence(detectedLanguage.getConfidence());
 	    log_out.setTranslateLanguage(detectedLanguage.getLanguage());

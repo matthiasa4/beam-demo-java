@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.apache.beam.sdk.transforms.DoFn;
+import org.apache.beam.sdk.transforms.DoFn.ProcessContext;
 import org.apache.beam.sdk.transforms.windowing.BoundedWindow;
 import org.apache.beam.sdk.transforms.windowing.IntervalWindow;
 import org.apache.beam.sdk.values.KV;
@@ -16,9 +17,8 @@ import com.matthiasbaetens.gde.messages.UserAggregate;
 public class CountUsers extends DoFn<KV<String, Iterable<Log>>, UserAggregate> {
 
 	@ProcessElement
-	public void processElement(@Element KV<String, Iterable<Log>> userGBK, BoundedWindow window,
-			OutputReceiver<UserAggregate> receiver) {
-		KV<String, Iterable<Log>> in = userGBK;
+	public void processElement(ProcessContext c, BoundedWindow window) {
+		KV<String, Iterable<Log>> in = c.element();
 
 		List<Log> logs = Lists.newArrayList(in.getValue());
 		Collections.sort(logs);
@@ -33,10 +33,10 @@ public class CountUsers extends DoFn<KV<String, Iterable<Log>>, UserAggregate> {
 			}
 		}
 
-		UserAggregate userAggregate = new UserAggregate((IntervalWindow) window, in.getKey(), languages.size(), logs.size(),
+		UserAggregate userAggregate = new UserAggregate(window.toString(), in.getKey(), languages.size(), logs.size(),
 				timeBetween / logs.size(),
 				logs.get(logs.size() - 1).getTimestamp().getMillis() - logs.get(0).getTimestamp().getMillis());
 
-		receiver.output(userAggregate);
+		c.output(userAggregate);
 	}
 }

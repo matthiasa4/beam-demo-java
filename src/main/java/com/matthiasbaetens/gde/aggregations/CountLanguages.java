@@ -11,16 +11,16 @@ import com.matthiasbaetens.gde.messages.Log;
 public class CountLanguages extends DoFn<KV<String, Iterable<Log>>, LanguageAggregate> {
 
 	@ProcessElement
-	public void processElement(@Element KV<String, Iterable<Log>> languageGBK, IntervalWindow window, OutputReceiver<LanguageAggregate> receiver) {
+	public void processElement(ProcessContext c, IntervalWindow window) {
 		// Extract window
 		LanguageAggregate languageAggregate = new LanguageAggregate(
-				window,
-				languageGBK.getKey(),
-				IterableUtils.size(languageGBK.getValue()));
+				window.toString(),
+				c.element().getKey(),
+				IterableUtils.size(c.element().getValue()));
 		
 		System.out.println(window);
 		System.out.println(window.toString());
 		
-		receiver.output(languageAggregate);
+		c.output(languageAggregate);
 	}
 }

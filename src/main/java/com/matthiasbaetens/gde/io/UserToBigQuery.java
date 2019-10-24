@@ -15,7 +15,7 @@ public class UserToBigQuery extends DoFn<UserAggregate, TableRow> {
 				.set("number_of_sentences", userAggregate.getNumberOfSentences())
 				.set("number_of_languages", userAggregate.getNumberOfLanguages())
 				.set("average_time_between", userAggregate.getAverageTimeBetween())
-				.set("total_session_lenght", userAggregate.getTotalSessionLength());
+				.set("total_session_length", userAggregate.getTotalSessionLength());
 		c.output(row);
 	}
 }

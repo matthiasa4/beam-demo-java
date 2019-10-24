@@ -57,7 +57,7 @@ public class StreamingPipeline {
 				.setTableId(log_table);
 
 		PCollection<Log> logs = p
-				.apply("Read ", PubsubIO.readStrings().fromSubscription(options.getInputSubscription()))
+				.apply("Read ", PubsubIO.readMessagesWithAttributes().fromSubscription(options.getInputSubscription()))
 				.apply("Parse messages to Logs", ParDo.of(new MessageToLogs()))
 				.apply("Detect language", ParDo.of(new DetectLanguage()));
 		
